@@ -619,14 +619,17 @@ public class Principal extends javax.swing.JFrame {
         taConsole.setText(taConsole.getText() + s + "\n");
     }
 
+    /**
+     * Transformar en número de entrada (en base decimal) a la base que se 
+     * indique en el parámetro base.
+     * @param entrada Número en base decimal que queremos manipular
+     * @param base Base a la cual queremos transformar la entrada
+     */
     private void to(long entrada, int base) {
         String resultado = "", out = "";
         long input, aux = entrada;
-        //boolean error = false;
         while (Math.round(aux / base) != 0) {
             int residuo = (int) aux % base;//sacamos el residuo 
-            //if (residuo != 1 && residuo != 0) 
-            //    error = true;
             input = aux; //guardamos aux antes de hacer su división            
             aux /= base;//dividimos            
             resultado = Integer.toString(residuo) + resultado;//            
@@ -686,8 +689,13 @@ public class Principal extends javax.swing.JFrame {
             System.err.println(e.getMessage());
             logConsole("\n> Exception: " + e.getMessage() + getFecha());
         }
+        tfEntrada.requestFocus();
     }
 
+    /**
+     * Obtener la fecha y hora actual
+     * @return 
+     */
     private String getFecha() {
         String s = "||";
         Calendar c = Calendar.getInstance();
@@ -718,7 +726,6 @@ public class Principal extends javax.swing.JFrame {
     }
     private static Conversor conversorInput = Conversor.DECIMAL;
     private static Conversor conversorOutput = Conversor.BINARIO;
-    private static long input, output;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgInput;
     private javax.swing.ButtonGroup bgOutput;

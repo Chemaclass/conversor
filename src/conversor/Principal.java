@@ -265,10 +265,11 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(bt8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bt4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bt6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bt5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bt6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -500,44 +501,52 @@ public class Principal extends javax.swing.JFrame {
         taConsole.setText(taConsole.getText() + s + "\n");
     }
 
-    private void toBinario(long entrada) {
-        log("\n------BEGIN---------- " + entrada + " to " + conversor);
-        String resultado = "";
+    private void to(long entrada, int base) {
+        String resultado = "", out = "";
         long input, aux = entrada;
-        boolean error= false;
-        while (Math.round(aux / 2) != 0) {
-            int residuo = (int) aux % 2;//sacamos el residuo 
-            if (residuo != 1 && residuo != 0) {
-                error = true;
-                break;
-            }
+        //boolean error = false;
+        while (Math.round(aux / base) != 0) {
+            int residuo = (int) aux % base;//sacamos el residuo 
+            //if (residuo != 1 && residuo != 0) 
+            //    error = true;
             input = aux; //guardamos aux antes de hacer su división            
-            aux /= 2;//dividimos            
+            aux /= base;//dividimos            
             resultado = Integer.toString(residuo) + resultado;//            
-            log(input + " / 2 =  " + aux + " (->" + residuo + ")\t| ... " + resultado);
+            out += input + " / " + base + " =  " + aux + " (->" + residuo + ")\t| ... " + resultado + "\n";
         }
-        log("-------END---------");
-        if (!error) {
-            tfSalida.setText("1" + resultado);//Añadimos un 1 al princip
-        } else {
-            tfSalida.setText("Error. Número demasiado grande.");
-        }
+        // Y una vez más para el que queda
+        int residuo = (int) aux % base;//sacamos el residuo            
+        input = aux; //guardamos aux antes de hacer su división            
+        aux /= base;//dividimos            
+        resultado = Integer.toString(residuo) + resultado;//            
+        out += input + " / " + base + " =  " + aux + " (->" + residuo + ")\t| ... " + resultado + "\n";
+
+        log(out);
+        tfSalida.setText(resultado); //TextField de resultado
+
+    }
+
+    private void toBinario(long entrada) {
+        to(entrada, 2);
     }
 
     private void toOctal(long entrada) {
+        to(entrada,8);
     }
 
     private void toHexadecimal(long entrada) {
+        to(entrada,16);
     }
 
     private void toDecimal(long entrada) {
-        tfSalida.setText("" + entrada);
+        to(entrada,10);
     }
 
     private void convertir() {
         try {
             System.out.print("Botón convertir a > ");
             long entrada = Long.parseLong(tfEntrada.getText().toString());
+            log("\n------BEGIN---------- " + entrada + " to " + conversor);
             switch (conversor) {
                 case BINARIO:
                     System.out.println("BINARIO");
@@ -556,17 +565,18 @@ public class Principal extends javax.swing.JFrame {
                     toDecimal(entrada);
                     break;
             }
+            log("-------END---------");
         } catch (NumberFormatException e) {
             System.err.println(e.getMessage());
-            logConsole("\n> NumberFormatException: " + e.getMessage() + "||" + getFecha() + "||");
+            logConsole("\n> NumberFormatException: " + e.getMessage() + getFecha());
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            logConsole("\n> Exception: " + e.getMessage() + "||" + getFecha() + "||");
+            logConsole("\n> Exception: " + e.getMessage() + getFecha());
         }
     }
 
     private String getFecha() {
-        String s = "";
+        String s = "||";
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
@@ -574,7 +584,8 @@ public class Principal extends javax.swing.JFrame {
         int hour = c.get(Calendar.HOUR);
         int minute = c.get(Calendar.MINUTE);
         int second = c.get(Calendar.SECOND);
-        s = day_of_month + "/" + month + "/" + year + " " + hour + ":" + minute + ":" + second;
+        s += day_of_month + "/" + month + "/" + year + " " + hour + ":" + minute + ":" + second;
+        s += "||";
         return s;
     }
 

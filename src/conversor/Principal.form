@@ -305,10 +305,12 @@
                       <Component id="bt9" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="bt4" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="bt5" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="bt6" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="bt5" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="bt6" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">

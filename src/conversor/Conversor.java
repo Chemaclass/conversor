@@ -1,5 +1,7 @@
 package conversor;
 
+import com.chemaclass.conversorbase.Principal;
+
 /**
  *
  * @author chemaclass

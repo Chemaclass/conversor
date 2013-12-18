@@ -2,11 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package conversor;
+package com.chemaclass.conversorbase;
 
+import com.chemaclass.conversorbase.base.Base;
+import com.chemaclass.conversorbase.base.Binary;
+import com.chemaclass.conversorbase.base.Decimal;
+import com.chemaclass.conversorbase.base.Hexadecimal;
+import com.chemaclass.conversorbase.base.Octal;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.Calendar;
-import java.util.Date;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
 
 /**
  *
@@ -56,6 +63,7 @@ public class Principal extends javax.swing.JFrame {
         bt1 = new javax.swing.JButton();
         bt3 = new javax.swing.JButton();
         bt0 = new javax.swing.JButton();
+        panelHexa = new javax.swing.JPanel();
         panelBaseInput = new javax.swing.JPanel();
         rbBinarioInput = new javax.swing.JRadioButton();
         rbOctalInput = new javax.swing.JRadioButton();
@@ -68,6 +76,7 @@ public class Principal extends javax.swing.JFrame {
         rbDecimalOutput = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        btInvertir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -198,6 +207,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panelHexaLayout = new javax.swing.GroupLayout(panelHexa);
+        panelHexa.setLayout(panelHexaLayout);
+        panelHexaLayout.setHorizontalGroup(
+            panelHexaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelHexaLayout.setVerticalGroup(
+            panelHexaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 86, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -205,6 +225,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelHexa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(bt7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -231,7 +252,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addComponent(panelHexa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +264,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(bt5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(bt6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -382,6 +404,13 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setText("Salida");
 
+        btInvertir.setText("Invertir");
+        btInvertir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btInvertirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -400,11 +429,6 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(btCleanSalida)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btConvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,7 +440,15 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(panelBaseOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)))
+                        .addGap(6, 6, 6))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(116, 116, 116)
+                                .addComponent(btInvertir, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -433,7 +465,8 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(btCleanAll))
+                    .addComponent(btCleanAll)
+                    .addComponent(btInvertir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -445,12 +478,12 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(tfSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btCleanSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(panelBaseInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(panelBaseOutput, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -469,39 +502,39 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt2ActionPerformed
-        fillNumber(2);
+        printLetter(2);
     }//GEN-LAST:event_bt2ActionPerformed
 
     private void bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt1ActionPerformed
-        fillNumber(1);
+        printLetter(1);
     }//GEN-LAST:event_bt1ActionPerformed
 
     private void bt3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt3ActionPerformed
-        fillNumber(3);
+        printLetter(3);
     }//GEN-LAST:event_bt3ActionPerformed
 
     private void bt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt4ActionPerformed
-        fillNumber(4);
+        printLetter(4);
     }//GEN-LAST:event_bt4ActionPerformed
 
     private void bt5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt5ActionPerformed
-        fillNumber(5);
+        printLetter(5);
     }//GEN-LAST:event_bt5ActionPerformed
 
     private void bt6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt6ActionPerformed
-        fillNumber(6);
+        printLetter(6);
     }//GEN-LAST:event_bt6ActionPerformed
 
     private void bt7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt7ActionPerformed
-        fillNumber(7);
+        printLetter(7);
     }//GEN-LAST:event_bt7ActionPerformed
 
     private void bt8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt8ActionPerformed
-        fillNumber(8);
+        printLetter(8);
     }//GEN-LAST:event_bt8ActionPerformed
 
     private void bt9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt9ActionPerformed
-        fillNumber(9);
+        printLetter(9);
     }//GEN-LAST:event_bt9ActionPerformed
 
     private void btConvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConvertirActionPerformed
@@ -509,20 +542,56 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btConvertirActionPerformed
 
     private void rbBinarioInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbBinarioInputActionPerformed
-        conversorInput = Conversor.BINARIO;
+        selectInput(Conversor.Binary);
     }//GEN-LAST:event_rbBinarioInputActionPerformed
 
     private void rbOctalInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOctalInputActionPerformed
-        conversorInput = Conversor.OCTAL;
+        selectInput(Conversor.Octal);
     }//GEN-LAST:event_rbOctalInputActionPerformed
 
     private void rbHexadecimalInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHexadecimalInputActionPerformed
-        conversorInput = Conversor.HEXADECIMAL;
+        selectInput(Conversor.Hexadecimal);
     }//GEN-LAST:event_rbHexadecimalInputActionPerformed
 
     private void rbDecimalInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDecimalInputActionPerformed
-        conversorInput = Conversor.DECIMAL;
+        selectInput(Conversor.Decimal);
     }//GEN-LAST:event_rbDecimalInputActionPerformed
+
+    private void selectInput(Conversor c) {
+        panelHexa.setVisible(false);
+        switch (c) {
+            case Binary: // Binario
+                baseInput = new Binary();
+                break;
+            case Octal: // Octal
+                baseInput = new Octal();
+                break;
+            case Decimal: // Decimal
+                baseInput = new Decimal();
+                break;
+            case Hexadecimal: // Hexadecimal
+                baseInput = new Hexadecimal();
+                panelHexa.setVisible(true);
+                break;
+        }
+    }
+
+    private void selectOutput(Conversor c) {
+        switch (c) {
+            case Binary: // Binario
+                conversorOutput = Conversor.Binary;
+                break;
+            case Octal: // Octal
+                conversorOutput = Conversor.Octal;
+                break;
+            case Decimal: // Decimal
+                conversorOutput = Conversor.Decimal;
+                break;
+            case Hexadecimal: // Hexadecimal
+                conversorOutput = Conversor.Hexadecimal;
+                break;
+        }
+    }
 
     private void btCleanEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCleanEntradaActionPerformed
         tfEntrada.setText("");
@@ -540,7 +609,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btCleanAllActionPerformed
 
     private void bt0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt0ActionPerformed
-        fillNumber(0);
+        printLetter(0);
     }//GEN-LAST:event_bt0ActionPerformed
 
     private void tfEntradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfEntradaKeyPressed
@@ -551,28 +620,120 @@ public class Principal extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         tfEntrada.requestFocus();
+        init();
     }//GEN-LAST:event_formComponentShown
 
+    private void init() {
+
+
+        baseInput = new Decimal();
+        conversorOutput = Conversor.Binary;
+
+        initPanelHexa();
+
+    }
+
+    /**
+     * Inicializa los botones
+     */
+    private void initPanelHexa() {
+        int width = 50, height = 40;
+        String[][] letras = {{"A", "B", "C"}, {"D", "E", "F"}};
+        for (int i = 0; i < letras.length; i++) {
+            for (int j = 0; j < letras[i].length; j++) {
+                final String letra = letras[i][j];
+                JButton bt = new JButton(letra);
+                int x = 5 + j * width;
+                int y = i * height;
+                bt.setBounds(x, y, width, height);
+                bt.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        printLetter(letra);
+                    }
+                });
+                panelHexa.add(bt);
+            }
+        }
+    }
+
+    /**
+     * Escribir la letra en la posición del input que esté el cursor
+     *
+     * @param letter letra a escribir
+     */
+    private void printLetter(String letter) {
+        String input = tfEntrada.getText().toString();
+        // Obtenemos la posición actual del cursor
+        int start = tfEntrada.getSelectionStart();
+        // introducimos la letra A en la posición del cursor
+        String s = input.substring(0, start) + letter + input.substring(start);
+        tfEntrada.setText(s);
+        // colocamos el cursor delante de la letra puesta
+        tfEntrada.setSelectionStart(start + 1);
+        //tfEntrada.setSelection(start + 1);
+    }
+
+    private void printLetter(int letter) {
+        printLetter(String.valueOf(letter));
+    }
+
+    /**
+     * Llevar a cabo la conversión entre los dos números en bases distintas
+     */
+    private void convertir() {
+        taConsole.setText(null);
+        String input = tfEntrada.getText().toString();
+        String result = "...result...";
+        try {
+            if (input.length() == 0) {
+                log("Input error");
+                return;
+            }
+            log(" Convert " + baseInput.me() + " " + "(" + input + ") "
+                    + " to "
+                    + conversorOutput.name() + ": " + "\n");
+            switch (conversorOutput) {
+                case Binary:
+                    result = baseInput.toBinary(input);
+                    break;
+                case Octal:
+                    result = baseInput.toOctal(input);
+                    break;
+                case Decimal:
+                    result = baseInput.toDecimal(input);
+                    break;
+                case Hexadecimal:
+                    result = baseInput.toHexadecimal(input);
+                    break;
+            }
+            tfSalida.setText(result);
+            // log("-------END---------\n");
+        } catch (NumberFormatException e) {
+            log("Input error");
+        }
+        tfEntrada.requestFocus();
+    }
+
     private void rbBinarioOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbBinarioOutputActionPerformed
-        conversorOutput = Conversor.BINARIO;
+        selectOutput(Conversor.Binary);
     }//GEN-LAST:event_rbBinarioOutputActionPerformed
 
     private void rbOctalOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbOctalOutputActionPerformed
-        conversorOutput = Conversor.OCTAL;
+        selectOutput(Conversor.Octal);
     }//GEN-LAST:event_rbOctalOutputActionPerformed
 
     private void rbHexadecimalOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbHexadecimalOutputActionPerformed
-        conversorOutput = Conversor.HEXADECIMAL;
+        selectOutput(Conversor.Hexadecimal);
     }//GEN-LAST:event_rbHexadecimalOutputActionPerformed
 
     private void rbDecimalOutputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDecimalOutputActionPerformed
-        conversorOutput = Conversor.DECIMAL;
+        selectOutput(Conversor.Decimal);
     }//GEN-LAST:event_rbDecimalOutputActionPerformed
 
-    private void fillNumber(int n) {
-        String s = tfEntrada.getText().toString();
-        tfEntrada.setText(s + Integer.toString(n));
-    }
+    private void btInvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInvertirActionPerformed
+        invertir();
+    }//GEN-LAST:event_btInvertirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -588,16 +749,22 @@ public class Principal extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -609,123 +776,50 @@ public class Principal extends javax.swing.JFrame {
         });
     }
 
-    private void log(String s) {
-        System.out.println("log >> " + s);
-        // Para la consola de la app
-        taSalida.setText(taSalida.getText() + s + "\n");
-    }
-
     private void logConsole(String s) {
         taConsole.setText(taConsole.getText() + s + "\n");
     }
 
     /**
-     * Transformar en número de entrada (en base decimal) a la base que se 
-     * indique en el parámetro base.
-     * @param entrada Número en base decimal que queremos manipular
-     * @param base Base a la cual queremos transformar la entrada
+     * Escribe en la consola de la app
+     *
+     * @param s String a escribir en la consola de la app (con \n)
      */
-    private void to(long entrada, int base) {
-        String resultado = "", out = "";
-        long input, aux = entrada;
-        while (Math.round(aux / base) != 0) {
-            int residuo = (int) aux % base;//sacamos el residuo 
-            input = aux; //guardamos aux antes de hacer su división            
-            aux /= base;//dividimos            
-            resultado = Integer.toString(residuo) + resultado;//            
-            out += input + " / " + base + " =  " + aux + " (->" + residuo + ")\t| ... " + resultado + "\n";
-        }
-        // Y una vez más para el que queda
-        int residuo = (int) aux % base;//sacamos el residuo            
-        input = aux; //guardamos aux antes de hacer su división            
-        aux /= base;//dividimos            
-        resultado = Integer.toString(residuo) + resultado;//            
-        out += input + " / " + base + " =  " + aux + " (->" + residuo + ")\t| ... " + resultado;
-
-        log(out);
-        tfSalida.setText(resultado); //TextField de resultado
-    }
-
-    private void convertir() {
-        try {
-            long entrada = Long.parseLong(tfEntrada.getText().toString());
-            log("> Convertir de "+conversorInput.name()+" a "+conversorOutput.name()+": "+entrada);
-            
-            switch(conversorInput){
-                case BINARIO:
-                    //Debemos obtener la entrada en decimal
-                    entrada = get(entrada,2);
-                    break;
-                case OCTAL:
-                    entrada = get(entrada,8);
-                    break;
-                case HEXADECIMAL:
-                    entrada = get(entrada,16);
-                    break;
-                case DECIMAL:
-                    entrada = get(entrada,10);
-                    break;
-            }
-            //Y de decimal la convertimos en lo que nos pidan
-            switch (conversorOutput) {
-                case BINARIO:
-                    to(entrada,2);
-                    break;
-                case OCTAL:
-                    to(entrada,8);
-                    break;
-                case HEXADECIMAL:
-                    to(entrada,16);
-                    break;
-                case DECIMAL:
-                    to(entrada,10);
-                    break;
-            }
-            log("-------END---------\n");
-        } catch (NumberFormatException e) {
-            System.err.println(e.getMessage());
-            logConsole("\n> NumberFormatException: " + e.getMessage() + getFecha());
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            logConsole("\n> Exception: " + e.getMessage() + getFecha());
-        }
-        tfEntrada.requestFocus();
+    public static void log(String s) {
+        // Para la consola de la app
+        taSalida.setText(taSalida.getText() + s + "\n");
     }
 
     /**
-     * Obtener la fecha y hora actual
-     * @return 
+     * Invierte input<->Output
      */
-    private String getFecha() {
-        String s = "||";
-        Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day_of_month = c.get(Calendar.DAY_OF_MONTH);
-        int hour = c.get(Calendar.HOUR);
-        int minute = c.get(Calendar.MINUTE);
-        int second = c.get(Calendar.SECOND);
-        s += day_of_month + "/" + month + "/" + year + " " + hour + ":" + minute + ":" + second;
-        s += "||";
-        return s;
-    }
-
-    /**
-     * Obtener el número de entrada en decimal. La base indica en qué base se encuentra
-     * @param entrada Número input
-     * @param base Base original
-     * @return número input transformado a decimal
-     */
-    private long get(long entrada, int base) {
-        return Long.parseLong(""+entrada, base);
+    private void invertir() {
+        // Cambiamos los Spinners
+        /*
+         ButtonModel inputSelect = bgInput.getSelection();// spInput.getSelectedItemPosition();
+         ButtonModel outputSelect = bgOutput.getSelection();//int outputSelect = spOutput.getSelectedItemPosition();
+         bgInput.setSelected(outputSelect, rootPaneCheckingEnabled); 
+         bgOutput.setSelected(inputSelect, false);
+         * */
+        // cambiamos los textos
+        String input = tfEntrada.getText().toString();
+        String output = tfSalida.getText().toString();
+        tfEntrada.setText(output);
+        tfSalida.setText(input);
     }
 
     private enum Conversor {
 
-        BINARIO, OCTAL, HEXADECIMAL, DECIMAL
+        Binary, Octal, Hexadecimal, Decimal
     }
-    private static Conversor conversorInput = Conversor.DECIMAL;
-    private static Conversor conversorOutput = Conversor.BINARIO;
+    /**
+     * Tipo de base para la salida
+     */
+    private static Conversor conversorOutput = Conversor.Binary;
+    /**
+     * Base de la cual convertir
+     */
+    private Base baseInput;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgInput;
     private javax.swing.ButtonGroup bgOutput;
@@ -743,6 +837,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btCleanEntrada;
     private javax.swing.JButton btCleanSalida;
     private javax.swing.JButton btConvertir;
+    private javax.swing.JButton btInvertir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -753,6 +848,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelBaseInput;
     private javax.swing.JPanel panelBaseOutput;
+    private javax.swing.JPanel panelHexa;
     private javax.swing.JRadioButton rbBinarioInput;
     private javax.swing.JRadioButton rbBinarioOutput;
     private javax.swing.JRadioButton rbDecimalInput;
@@ -762,7 +858,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbOctalInput;
     private javax.swing.JRadioButton rbOctalOutput;
     private javax.swing.JTextArea taConsole;
-    private javax.swing.JTextArea taSalida;
+    private static javax.swing.JTextArea taSalida;
     private javax.swing.JTextField tfEntrada;
     private javax.swing.JTextField tfSalida;
     // End of variables declaration//GEN-END:variables
